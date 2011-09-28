@@ -7,4 +7,4 @@ build
 *.xcworkspace
 xcuserdata
 *.DS_Store
-iphone/ThirdParty/iphone_webdriver/lib/buildtime-src/cocoahttpserver/extensions/patched/
+
