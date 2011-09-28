@@ -94,8 +94,14 @@ static NSString *kValueKey = @"value";
 // Executes |script| with |EXECUTE_SCRIPT| atom. The result can be retrieved via
 // |executionResult| property.
 - (void)executeScriptWithArgs:(NSArray *)args {
+    
+  std::string compiled("");
+  for (size_t i = 0; webdriver::atoms::EXECUTE_SCRIPT[i] != NULL; i++) {
+      compiled.append(webdriver::atoms::EXECUTE_SCRIPT[i]);
+  }
+  
   NSString *executeScript = [NSString stringWithFormat:kExecutionScript,
-      [NSString stringWithUTF8String:webdriver::atoms::EXECUTE_SCRIPT],
+      [NSString stringWithCString:compiled.c_str() encoding:NSUTF8StringEncoding],
       script_, [args JSONRepresentation]];
   NSString *result =
       [webView_ stringByEvaluatingJavaScriptFromString:executeScript];

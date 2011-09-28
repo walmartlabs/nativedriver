@@ -52,7 +52,7 @@ static NSDictionary *wireProtocolToAtomsStrategy =
 
 - (NSDictionary *)idDictionary;
 
-- (id)executeAtom:(const char* const)atom
+- (id)executeAtom:(NSString *)atom
          withArgs:(NSArray *)args;
 
 - (id)executeJsFunction:(NSString *)script
@@ -84,6 +84,14 @@ static NSDictionary *wireProtocolToAtomsStrategy =
   [super dealloc];
 }
 
+- (NSString *)joinAtom:(const char* const*)pieces {
+    NSMutableString *result = [[NSMutableString alloc] init];
+    for (size_t i = 0; pieces[i] != NULL; i++) {
+        [result appendString:[NSString stringWithUTF8String:pieces[i]]];
+    }
+    return result;
+}
+
 #pragma mark NDWebElement methods
 
 + (NDWebElement *)elementWithWebView:(UIWebView *)webView
@@ -98,10 +106,10 @@ static NSDictionary *wireProtocolToAtomsStrategy =
 }
 
 // Executes a WebDriver atom defined in atoms.h.
-- (id)executeAtom:(const char* const)atom
+- (id)executeAtom:(NSString *)atom
          withArgs:(NSArray *)args {
   return [NDJavaScriptRunner
-          executeJsFunction:[NSString stringWithUTF8String:atom]
+          executeJsFunction:atom
                    withArgs:args
                     webView:webView_];
 }
@@ -118,18 +126,18 @@ static NSDictionary *wireProtocolToAtomsStrategy =
 
 // Get an attribute with the given name.
 - (id)attribute:(NSString *)name {
-  return [self executeAtom:webdriver::atoms::GET_ATTRIBUTE
+  return [self executeAtom:[self joinAtom:webdriver::atoms::GET_ATTRIBUTE]
                   withArgs:[NSArray arrayWithObjects:
                             [self idDictionary], name, nil]];
 }
 
 - (void)clear {
-  [self executeAtom:webdriver::atoms::CLEAR
+  [self executeAtom:[self joinAtom:webdriver::atoms::CLEAR]
            withArgs:[NSArray arrayWithObject:[self idDictionary]]];
 }
 
 - (void)click {
-  [self executeAtom:webdriver::atoms::CLICK
+  [self executeAtom:[self joinAtom:webdriver::atoms::CLICK]
            withArgs:[NSArray arrayWithObject:[self idDictionary]]];
 }
 
@@ -152,7 +160,7 @@ static NSDictionary *wireProtocolToAtomsStrategy =
 // If the element is not selectable, throws a WebDriver exception. The exception
 // should be wrapped and returned to the NativeDriver client.
 - (BOOL)isSelected {
-  return [[self executeAtom:webdriver::atoms::IS_SELECTED
+  return [[self executeAtom:[self joinAtom:webdriver::atoms::IS_SELECTED]
                    withArgs:[NSArray arrayWithObject:[self idDictionary]]]
           boolValue];
 }
@@ -167,13 +175,13 @@ static NSDictionary *wireProtocolToAtomsStrategy =
     view = view.superview;
   }
   // Check the DOM element is displayed
-  return [[self executeAtom:webdriver::atoms::IS_DISPLAYED
+  return [[self executeAtom:[self joinAtom:webdriver::atoms::IS_DISPLAYED]
                    withArgs:[NSArray arrayWithObject:[self idDictionary]]]
           boolValue];
 }
 
 - (BOOL)isEnabled {
-  return [[self executeAtom:webdriver::atoms::IS_ENABLED
+  return [[self executeAtom:[self joinAtom:webdriver::atoms::IS_ENABLED]
                    withArgs:[NSArray arrayWithObject:[self idDictionary]]]
           boolValue];
 }
@@ -189,18 +197,18 @@ static NSDictionary *wireProtocolToAtomsStrategy =
 
 - (void)sendKeys:(NSArray *)array {
   NSString *stringToType = [array componentsJoinedByString:@""];
-  [self executeAtom:webdriver::atoms::TYPE
+  [self executeAtom:[self joinAtom:webdriver::atoms::TYPE]
            withArgs:[NSArray arrayWithObjects:[self idDictionary],
                      stringToType, nil]];
 }
 
 - (void)submit {
-  [self executeAtom:webdriver::atoms::SUBMIT
+  [self executeAtom:[self joinAtom:webdriver::atoms::SUBMIT]
            withArgs:[NSArray arrayWithObject:[self idDictionary]]];
 }
 
 - (NSString *)text {
-  return [self executeAtom:webdriver::atoms::GET_TEXT
+  return [self executeAtom:[self joinAtom:webdriver::atoms::GET_TEXT]
                   withArgs:[NSArray arrayWithObject:[self idDictionary]]];
 }
 
@@ -242,7 +250,7 @@ static NSDictionary *wireProtocolToAtomsStrategy =
   NSArray *webResults = nil;
   if (maxCount == 1U) {
     // To get better performance, use FIND_ELEMENT if searching only 1 element.
-    NSDictionary *firstFound = [self executeAtom:webdriver::atoms::FIND_ELEMENT
+    NSDictionary *firstFound = [self executeAtom:[self joinAtom:webdriver::atoms::FIND_ELEMENT]
                                         withArgs:args];
     // FIND_ELEMENT returns NSNull if no element was found. It should not be
     // added to the results.
@@ -250,7 +258,7 @@ static NSDictionary *wireProtocolToAtomsStrategy =
       webResults = [NSArray arrayWithObject:firstFound];
     }
   } else {
-    webResults = [self executeAtom:webdriver::atoms::FIND_ELEMENTS
+    webResults = [self executeAtom:[self joinAtom:webdriver::atoms::FIND_ELEMENTS]
                           withArgs:args];
     // FIND_ELEMENTS returns 0-length array if no element was found. No special
     // handling required here.
