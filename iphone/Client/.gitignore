@@ -1,3 +1,5 @@
 build
 class
 test
+out
+*.iws
