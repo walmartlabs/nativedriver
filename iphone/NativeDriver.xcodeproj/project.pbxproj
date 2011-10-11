@@ -996,6 +996,7 @@
 		EFC121E21378D35A009E3F71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/NativeDriver-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -1010,6 +1011,7 @@
 		EFC121E31378D35A009E3F71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/NativeDriver-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
