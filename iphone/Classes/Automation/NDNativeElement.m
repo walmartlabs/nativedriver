@@ -145,6 +145,7 @@
 - (NSArray *)findElementsBy:(NSString *)by
                       value:(NSString *)value
                    maxCount:(NSUInteger)maxCount {
+//  NSLog(@"UIElement: %@", self.view);
   NSMutableArray *results = [NSMutableArray array];
   if ([self matchesBy:by value:value]) {
     [results addObject:self];
