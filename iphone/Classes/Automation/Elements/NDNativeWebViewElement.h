@@ -22,5 +22,7 @@
 // |NDWebElement| inside a web view.
 @interface NDNativeWebViewElement : NDNativeElement
 
+- (NSString *)performGetText;
+
 @end
 

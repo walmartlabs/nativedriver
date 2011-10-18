@@ -19,6 +19,7 @@
 #import "NDNativeWebViewElement.h"
 #import "NDJavaScriptRunner.h"
 #import "NDWebElement.h"
+#import "NDMainThreadRunner.h"
 
 @implementation NDNativeWebViewElement
 
@@ -61,6 +62,15 @@
 // we don't search inside UIView.
 - (NSArray *)subElements {
   return [NSArray array];
+}
+
+- (NSString *)text {
+    return [NDMainThreadRunner performSelector:@selector(performGetText)
+                                          args:nil
+                                        target:self];
+}
+- (NSString *) performGetText {
+    return [(UIWebView *)[self view] stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];    
 }
 
 @end
