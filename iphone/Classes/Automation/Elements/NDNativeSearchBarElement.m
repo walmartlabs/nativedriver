@@ -7,6 +7,8 @@
 
 @implementation NDNativeSearchBarElement
 - (void)doSubmit {
+    [self becomeFirstResponderOrThrowException];
+
     UISearchBar *searchBar = (UISearchBar *)[self view];
     id<UISearchBarDelegate> delegate = [searchBar delegate];
     if ([delegate respondsToSelector:@selector(searchBarSearchButtonClicked:)]) {
@@ -18,4 +20,15 @@
                            withObject:nil
                         waitUntilDone:YES];
 }
+
+- (void)didChange {
+    [self becomeFirstResponderOrThrowException];
+
+    UISearchBar *searchBar = (UISearchBar *)[self view];
+    id<UISearchBarDelegate> delegate = [searchBar delegate];
+    if ([delegate respondsToSelector:@selector(searchBarTextDidEndEditing:)]) {
+        [delegate searchBarTextDidEndEditing:searchBar];
+    }
+}
+
 @end

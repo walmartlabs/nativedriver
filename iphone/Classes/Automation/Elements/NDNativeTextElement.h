@@ -39,5 +39,8 @@
 // element doesn't support this message.
 - (void)didChange;
 
+- (void)becomeFirstResponderOrThrowException;
+
+
 @end
 
