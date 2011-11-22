@@ -26,6 +26,7 @@
 #import "NDMainThreadRunner.h"
 #import "NDToucher.h"
 #import "NSException+WebDriver.h"
+#import "NDNativeSearchBarElement.h"
 
 @interface NDNativeElement ()
 
@@ -60,6 +61,9 @@
   }
   if ([view isKindOfClass:[UITextField class]]) {
     return [[[NDNativeTextFieldElement alloc] initWithView:view] autorelease];
+  }
+  if ([view isKindOfClass:[UISearchBar class]]) {
+    return [[[NDNativeSearchBarElement alloc] initWithView:view] autorelease];
   }
   if ([view isKindOfClass:[UITextView class]]) {
     return [[[NDNativeTextViewElement alloc] initWithView:view] autorelease];

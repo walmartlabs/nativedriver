@@ -116,6 +116,8 @@
 		EFF8DE5E1384F3B6005945FC /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF8DE511384F3B6005945FC /* SBJsonParser.m */; };
 		EFF8DE5F1384F3B6005945FC /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = EFF8DE521384F3B6005945FC /* SBJsonWriter.h */; };
 		EFF8DE601384F3B6005945FC /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF8DE531384F3B6005945FC /* SBJsonWriter.m */; };
+		EFF8DE601384F3B6005945FE /* NDNativeSearchBarElement.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF8DE601384F3B6005945FD /* NDNativeSearchBarElement.m */; };
+		EFF8DE601384F3B600594600 /* NDNativeSearchBarElement.h in Headers */ = {isa = PBXBuildFile; fileRef = EFF8DE601384F3B6005945FF /* NDNativeSearchBarElement.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +318,8 @@
 		EFF8DE511384F3B6005945FC /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonParser.m; path = "ThirdParty/iphone_webdriver/lib/buildtime-src/json-framework/project/Source/SBJsonParser.m"; sourceTree = "<group>"; };
 		EFF8DE521384F3B6005945FC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = "ThirdParty/iphone_webdriver/lib/buildtime-src/json-framework/project/Source/SBJsonWriter.h"; sourceTree = "<group>"; };
 		EFF8DE531384F3B6005945FC /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = "ThirdParty/iphone_webdriver/lib/buildtime-src/json-framework/project/Source/SBJsonWriter.m"; sourceTree = "<group>"; };
+		EFF8DE601384F3B6005945FD /* NDNativeSearchBarElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDNativeSearchBarElement.m; sourceTree = "<group>"; };
+		EFF8DE601384F3B6005945FF /* NDNativeSearchBarElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDNativeSearchBarElement.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +503,8 @@
 		EFE0572513D7C440008908E6 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				EFF8DE601384F3B6005945FF /* NDNativeSearchBarElement.h */,
+				EFF8DE601384F3B6005945FD /* NDNativeSearchBarElement.m */,
 				EF67654013E245F4000529C5 /* NDNativeButtonElement.h */,
 				EF67654113E245F4000529C5 /* NDNativeButtonElement.m */,
 				EF6F5A1B13E183BC0010C1D9 /* NDNativeSwitchElement.h */,
@@ -731,6 +737,7 @@
 				EF67654413E245F4000529C5 /* NDNativeButtonElement.h in Headers */,
 				EFDA59CA13E3F2260022E0EF /* NDTimeouts.h in Headers */,
 				EF17647613E684FB007045DC /* NDAttribute.h in Headers */,
+				EFF8DE601384F3B600594600 /* NDNativeSearchBarElement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +926,7 @@
 				EF67654513E245F4000529C5 /* NDNativeButtonElement.m in Sources */,
 				EFDA59CB13E3F2260022E0EF /* NDTimeouts.m in Sources */,
 				EF17647713E684FB007045DC /* NDAttribute.m in Sources */,
+				EFF8DE601384F3B6005945FE /* NDNativeSearchBarElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
